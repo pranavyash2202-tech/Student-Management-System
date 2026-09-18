@@ -1,337 +1,267 @@
-# Student-Management-System
+# 🎓 Student Management System
 
+A simple **console-based Student Management System developed in Java** to manage student records efficiently.
 
-# Student Management System
+The application allows users to **add, view, search, update, delete, and sort student records**. Student data can also be saved to and loaded from a text file, allowing records to persist between program executions.
 
-A comprehensive web-based platform for managing student information, academic records, enrollment, and institutional operations.
+## 🚀 Features
 
-## Table of Contents
+* ➕ Add a new student
+* 👀 View all students
+* 🔍 Search student by ID
+* ✏️ Update student details
+* 🗑️ Delete student records
+* 📊 Sort students by marks
+* 💾 Save student data to a file
+* 📂 Load previously saved student data
+* ✅ Input validation
+* 🎓 Automatic grade calculation
+* ⚠️ Handles invalid input and file-related exceptions
 
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Usage](#usage)
-- [API Documentation](#api-documentation)
-- [Database Schema](#database-schema)
-- [Contributing](#contributing)
-- [License](#license)
-- [Support](#support)
+## 🛠️ Technologies Used
 
-## Features
+* **Java**
+* **ArrayList**
+* **File Handling**
+* **BufferedReader**
+* **BufferedWriter**
+* **Exception Handling**
+* **OOP Concepts**
+* **Comparator**
 
-### Student Management
-- **Student Records**: Create, update, and manage comprehensive student profiles
-- **Enrollment Management**: Track course registrations and program enrollment
-- **Academic History**: Maintain complete academic records and transcripts
-- **Document Management**: Upload and store student documents and certificates
+## 📋 Student Details
 
-### Academic Operations
-- **Course Management**: Create and manage courses, sections, and schedules
-- **Grade Tracking**: Record and calculate grades with customizable grading scales
-- **Attendance Monitoring**: Track student attendance and generate reports
-- **Transcript Generation**: Automated transcript creation and distribution
+Each student record contains:
 
-### Administration
-- **User Management**: Role-based access control (Admin, Faculty, Student, Parent)
-- **Dashboard Analytics**: Real-time insights into enrollment, performance, and operations
-- **Report Generation**: Customizable reports for various stakeholders
-- **Audit Logs**: Complete activity tracking and system audit trails
+* Student ID
+* Name
+* Age
+* Course
+* Marks
+* Grade
 
-### Communication
-- **Notifications**: Email and SMS alerts for important events
-- **Parent Portal**: Secure access for parents to view student progress
-- **Messaging System**: Direct communication between students, faculty, and administrators
+The `Student` class uses these attributes and provides getters/setters for managing the data.
 
-## Tech Stack
+## 🎯 Grade System
 
-### Backend
-- **Runtime**: Node.js / Python / Java (specify your choice)
-- **Framework**: Express.js / Django / Spring Boot
-- **Database**: PostgreSQL / MySQL
-- **Authentication**: JWT / OAuth 2.0
+|    Marks | Grade |
+| -------: | :---- |
+|   90–100 | A+    |
+|    80–89 | A     |
+|    70–79 | B     |
+|    60–69 | C     |
+|    50–59 | D     |
+| Below 50 | F     |
 
-### Frontend
-- **Framework**: React / Vue.js / Angular
-- **State Management**: Redux / Vuex / NgRx
-- **UI Components**: Material-UI / Bootstrap / Tailwind CSS
-- **Build Tool**: Webpack / Vite
+The grade is calculated automatically based on the student's marks.
 
-### Infrastructure
-- **Hosting**: AWS / GCP / Azure / DigitalOcean
-- **Container**: Docker / Kubernetes
-- **CI/CD**: GitHub Actions / GitLab CI / Jenkins
+## 💻 Application Menu
 
-## Installation
-
-### Prerequisites
-- Node.js v16+ (or Python 3.8+)
-- PostgreSQL v12+ (or MySQL 8.0+)
-- npm/yarn (or pip)
-- Git
-
-### Backend Setup
-
-1. Clone the repository:
-```bash
-git clone https://github.com/your-org/student-management-system.git
-cd student-management-system
+```text
+================================
+     STUDENT MANAGEMENT SYSTEM
+================================
+1. Add Student
+2. View Students
+3. Search Student
+4. Update Student
+5. Delete Student
+6. Sort by Marks
+7. Save Data
+8. Exit
+================================
+Enter your choice:
 ```
 
-2. Install dependencies:
-```bash
-npm install
-# or
-pip install -r requirements.txt
+## 📂 Project Structure
+
+```text
+StudentManagementSystem/
+│
+├── Main.java
+├── Student.java
+├── StudentManager.java
+├── FileHandler.java
+├── students.txt
+└── README.md
 ```
 
-3. Create environment file:
-```bash
-cp .env.example .env
+### 📄 Main.java
+
+Handles the main program and provides the menu-driven user interface. It connects user input with the `StudentManager` and `FileHandler` classes.
+
+### 📄 Student.java
+
+Represents a student object and stores:
+
+```text
+ID
+Name
+Age
+Course
+Marks
 ```
 
-4. Update `.env` with your configuration:
-```
-DATABASE_URL=postgresql://user:password@localhost/sms_db
-JWT_SECRET=your_secret_key_here
-API_PORT=5000
-NODE_ENV=development
-```
+It also calculates the student's grade and formats the student information for display.
 
-5. Run database migrations:
-```bash
-npm run migrate
-# or
-python manage.py migrate
-```
+### 📄 StudentManager.java
 
-6. Start the development server:
-```bash
-npm run dev
-# or
-python manage.py runserver
-```
+Handles student management operations including:
 
-### Frontend Setup
+* Add
+* View
+* Search
+* Update
+* Delete
+* Sort by marks
 
-1. Navigate to frontend directory:
-```bash
-cd frontend
+It uses an `ArrayList<Student>` to maintain the student records.
+
+### 📄 FileHandler.java
+
+Handles persistent storage of student records using the file:
+
+```text
+students.txt
 ```
 
-2. Install dependencies:
-```bash
-npm install
+Student details are written to the file as comma-separated values and loaded when the application starts.
+
+## 🔄 Working Flow
+
+```text
+              ┌──────────────┐
+              │    Start     │
+              └──────┬───────┘
+                     ↓
+          ┌─────────────────────┐
+          │ Load Saved Students │
+          └──────────┬──────────┘
+                     ↓
+             ┌──────────────┐
+             │  Main Menu   │
+             └──────┬───────┘
+                    ↓
+       ┌────────────┴────────────┐
+       ↓                         ↓
+ Add / View / Search      Update / Delete
+       ↓                         ↓
+       └────────────┬────────────┘
+                    ↓
+              Sort by Marks
+                    ↓
+                Save Data
+                    ↓
+                  Exit
 ```
 
-3. Create environment file:
-```bash
-cp .env.example .env
-```
+## ▶️ How to Run
 
-4. Update `.env` with API endpoints:
-```
-REACT_APP_API_URL=http://localhost:5000/api
-```
-
-5. Start development server:
-```bash
-npm start
-```
-
-Access the application at `http://localhost:3000`
-
-## Configuration
-
-### Database Configuration
-
-Update `config/database.js` (or `settings.py`):
-
-```javascript
-const dbConfig = {
-  host: process.env.DB_HOST || 'localhost',
-  port: process.env.DB_PORT || 5432,
-  database: process.env.DB_NAME || 'sms_db',
-  user: process.env.DB_USER || 'postgres',
-  password: process.env.DB_PASSWORD,
-  pool: {
-    min: 2,
-    max: 10
-  }
-};
-```
-
-### Authentication Configuration
-
-JWT settings in `.env`:
-
-```
-JWT_SECRET=your_secure_random_string
-JWT_EXPIRY=24h
-REFRESH_TOKEN_EXPIRY=7d
-```
-
-### Email Configuration
-
-For notification systems:
-
-```
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_USER=your_email@gmail.com
-SMTP_PASSWORD=your_app_password
-SENDER_EMAIL=noreply@institution.edu
-```
-
-## Usage
-
-### For Administrators
-
-1. **Access Admin Dashboard**: Log in with admin credentials
-2. **Manage Users**: Add/edit faculty, staff, and administrator accounts
-3. **View Analytics**: Monitor enrollment, performance metrics, and system health
-4. **Generate Reports**: Create custom reports for institutional analysis
-
-### For Faculty
-
-1. **View Roster**: See enrolled students in your courses
-2. **Record Grades**: Input and finalize student grades
-3. **Track Attendance**: Mark and monitor student attendance
-4. **Communicate**: Send notifications to students and parents
-
-### For Students
-
-1. **View Courses**: Check enrolled courses and schedules
-2. **Check Grades**: View current and historical grades
-3. **Download Transcripts**: Request and download academic transcripts
-4. **Manage Profile**: Update personal and contact information
-
-### For Parents
-
-1. **Monitor Progress**: View student grades and attendance
-2. **Receive Alerts**: Get notified of important academic events
-3. **View Reports**: Access generated academic reports
-
-## API Documentation
-
-### Base URL
-```
-http://localhost:5000/api/v1
-```
-
-### Authentication
-All API requests require a Bearer token:
+### 1. Clone the Repository
 
 ```bash
-Authorization: Bearer your_jwt_token
+git clone https://github.com/your-username/StudentManagementSystem.git
 ```
 
-### Key Endpoints
+### 2. Open the Project
 
-#### Students
-- `GET /students` - List all students
-- `POST /students` - Create new student
-- `GET /students/:id` - Get student details
-- `PUT /students/:id` - Update student
-- `DELETE /students/:id` - Delete student
+Open the project in:
 
-#### Courses
-- `GET /courses` - List all courses
-- `POST /courses` - Create new course
-- `GET /courses/:id` - Get course details
-- `PUT /courses/:id` - Update course
-- `GET /courses/:id/grades` - Get course grades
+* VS Code
+* IntelliJ IDEA
+* Eclipse
+* Any Java-supported IDE
 
-#### Grades
-- `POST /grades` - Record grade
-- `GET /students/:id/grades` - Get student grades
-- `GET /grades/:id` - Get specific grade
-- `PUT /grades/:id` - Update grade
+### 3. Compile the Program
 
-#### Authentication
-- `POST /auth/login` - User login
-- `POST /auth/logout` - User logout
-- `POST /auth/refresh` - Refresh access token
+Open the terminal inside the project folder and run:
 
-See `/docs/api` for complete API documentation.
+```bash
+javac *.java
+```
 
-## Database Schema
+### 4. Run the Program
 
-### Key Tables
+```bash
+java Main
+```
 
-**Students**
-- student_id (PK)
-- first_name, last_name
-- email, phone
-- date_of_birth
-- enrollment_date
-- status (active, inactive, graduated)
-- created_at, updated_at
+## 💾 Data Storage
 
-**Courses**
-- course_id (PK)
-- course_code, course_name
-- credits, semester
-- faculty_id (FK)
-- created_at, updated_at
+The application stores student information in:
 
-**Enrollments**
-- enrollment_id (PK)
-- student_id (FK)
-- course_id (FK)
-- enrollment_date
-- status (enrolled, dropped, completed)
+```text
+students.txt
+```
 
-**Grades**
-- grade_id (PK)
-- student_id (FK)
-- course_id (FK)
-- grade_value
-- grading_date
-- created_at
+When the program starts, it loads existing student records from the file. When the user selects **Save Data** or exits the application, the current records are written back to the file.
 
-See `/docs/database-schema.md` for detailed schema documentation.
+## 🔐 Input Validation
 
-## Contributing
+The program validates numerical inputs such as:
 
-Contributions are welcome! Please follow these guidelines:
+* Student ID
+* Age
+* Marks
+* Menu choice
 
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/your-feature`
-3. Commit changes: `git commit -am 'Add new feature'`
-4. Push to branch: `git push origin feature/your-feature`
-5. Submit a Pull Request
+Marks are specifically restricted to the range **0–100**.
 
-### Code Standards
-- Follow project coding conventions
-- Write clear commit messages
-- Add unit tests for new features
-- Update documentation as needed
+Duplicate student IDs are also prevented when adding a student.
 
-## License
+## 📊 Sorting
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Students can be sorted according to their marks.
 
-## Support
+The system sorts students in **descending order**, showing students with higher marks first.
 
-### Documentation
-- [User Guide](docs/user-guide.md)
-- [Administrator Guide](docs/admin-guide.md)
-- [API Documentation](docs/api.md)
-- [Database Schema](docs/database-schema.md)
+## 🧠 Concepts Demonstrated
 
-### Getting Help
-- **Issues**: Report bugs via [GitHub Issues](https://github.com/your-org/student-management-system/issues)
-- **Email**: support@institution.edu
-- **Community Forum**: https://community.institution.edu
+This project demonstrates important Java programming concepts:
 
-### Version History
-- v2.1.0 - Added parent portal features
-- v2.0.0 - Complete UI redesign
-- v1.5.0 - Mobile app support
-- v1.0.0 - Initial release
+* Classes and Objects
+* Encapsulation
+* Constructors
+* Getters and Setters
+* ArrayList
+* Searching
+* Sorting
+* File Handling
+* Exception Handling
+* Method Calling
+* Conditional Statements
+* Loops
+* Switch Case
+* Java Comparator
 
----
+## 🎯 Project Objectives
 
-**Last Updated**: September 2026  
-**Maintainer**: Your Organization
+* To understand Java Object-Oriented Programming.
+* To implement CRUD-like student record operations.
+* To practice Java collections using `ArrayList`.
+* To implement file-based data persistence.
+* To understand exception handling.
+* To build a practical menu-driven Java application.
+
+## 🔮 Future Enhancements
+
+Possible improvements for future versions:
+
+* 🔐 Admin login system
+* 🗄️ MySQL database integration
+* 📊 Attendance management
+* 📝 Subject-wise marks
+* 📈 Performance reports
+* 🌐 Web-based interface
+* 📱 Mobile application
+* 📤 Export records to CSV/PDF
+
+## 👨‍💻 Author
+
+**Pranav Ranjan**
+B.Tech CSE – AI & ML
+VIT Bhopal University
+
+## 📄 License
+
+This project is created for **educational purposes**.
